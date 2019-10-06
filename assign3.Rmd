@@ -1,6 +1,6 @@
 ---
 title: "Assignment 3"
-author: "Name 1, Name 2, Name 3"
+author: James Thompson: 301382134, Name 2, Name 3"
 date: "2019-10-04"
 output: html_document
 ---

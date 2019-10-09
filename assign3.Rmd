@@ -1,26 +1,15 @@
 ---
 title: "Assignment 3"
-author: James Thompson: 301382134, Name 2, Name 3"
-date: "2019-10-04"
-output: html_document
+author: "James Thompson, Sharanya Sivaraman, Neda Zolaktaf"
+date: '2019-10-04'
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## Instructions
-
-Fill in your computations and answers to the assignment questions in this
-RMarkdown document. When you are finished, click the "Knit" button on RStudio
-to render an HTML document. You can then use your browser or tool of choice
-to convert the HTML document to a PDF file.
-
-This assignment is to be handed in through canvas on Monday Oct 7 at 11:00pm.
-(Note that this due date is different from the due date given on the canvas
-Admin page.) This is a group assignment.
-You must join a group on canvas even if you want to work alone. Please upload one PDF file
-with your solutions per group. 
 
 ## Question 1 (Chapter 3, #15)
 This problem involves the Boston data set, which we saw in the lab for this chapter. We will now try to predict per capita crime rate using the other variables in this data set. In other words, per capita crime rate is the response, and the other variables are the predictors.
@@ -36,7 +25,7 @@ library(ggplot2)
 head(Boston)
 
 
-Do a bunch at once
+#Do a bunch at once
 # modBoston <- function(x) {
 #   form1 <- formula(paste0("crim~",x))
 #   fit1 <- lm(form1,data=Boston)
@@ -60,7 +49,9 @@ par(mfrow=c(2,2))
 ggplot(Boston,aes(y=crim,x=zn)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.zn),x=fitted(mod.zn))) + geom_point() 
 ```
-Statisically significant relationship between zn and crim. p-value for slope coefficent of zn = 5.51e-06 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between zn and crim. p-value for slope coefficient of zn = 5.51e-06 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
+
 ```{r}
 #indus
 mod.indus = lm(crim~indus,data=Boston)
@@ -68,7 +59,9 @@ summary(mod.indus)
 ggplot(Boston,aes(y=crim,x=indus)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.indus),x=fitted.values(mod.indus))) + geom_point() 
 ```
-Statisically significant relationship between indus and crim. p-value for slope coefficent of indus < 2e-16 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between indus and crim. p-value for slope coefficient of indus < 2e-16 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
+
 ```{r}
 #chas
 mod.chas = lm(crim~chas,data=Boston)
@@ -76,7 +69,9 @@ summary(mod.chas)
 ggplot(Boston,aes(y=crim,x=chas)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.chas),x=fitted.values(mod.chas))) + geom_point() 
 ```
+
 No evidence of linear relationship in dummy variable chas. 
+
 ```{r}
 #nox
 mod.nox = lm(crim~nox,data=Boston)
@@ -84,7 +79,8 @@ summary(mod.nox)
 ggplot(Boston,aes(y=crim,x=nox)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.nox),x=fitted.values(mod.nox))) + geom_point() 
 ```
-Statisically significant relationship between indus and crim p-value for slope coefficent of nox < 2e-16 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between indus and crim p-value for slope coefficient of nox < 2e-16 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 ```{r}
 #rm
@@ -94,7 +90,9 @@ ggplot(Boston,aes(y=crim,x=rm)) + geom_point() + geom_smooth(method = "lm",se = 
 ggplot(Boston,aes(y=rstudent(mod.rm),x=fitted.values(mod.rm))) + geom_point() 
 
 ```
-Statisically significant relationship between crim and rm p-value for slope coefficent of rm = 6.35e-07 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between crim and rm p-value for slope coefficient of rm = 6.35e-07 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
+
 ```{r}
 #age
 mod.age = lm(crim~age,data=Boston)
@@ -102,7 +100,8 @@ summary(mod.age)
 ggplot(Boston,aes(y=crim,x=age)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.age),x=fitted.values(mod.age))) + geom_point() 
 ```
-Statisically significant relationship between age and crim p-value for slope coefficent of age = 2.85e-16 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between age and crim p-value for slope coefficient of age = 2.85e-16 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 ```{r}
 #dis
@@ -111,7 +110,8 @@ summary(mod.dis)
 ggplot(Boston,aes(y=crim,x=dis)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.dis),x=fitted.values(mod.dis))) + geom_point() 
 ```
-Statisically significant relationship between dis and crim p-value for slope coefficent of dis < 2e-16 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between dis and crim p-value for slope coefficient of dis < 2e-16 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 ```{r}
 #rad
@@ -120,7 +120,8 @@ summary(mod.rad)
 ggplot(Boston,aes(y=crim,x=rad)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.rad),x=fitted.values(mod.rad))) + geom_point() 
 ```
-Statisically significant relationship between rad and crim p-value for slope coefficent of rad < 2e-16 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between rad and crim p-value for slope coefficient of rad < 2e-16 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 ```{r}
 #tax
@@ -129,7 +130,8 @@ summary(mod.tax)
 ggplot(Boston,aes(y=crim,x=tax)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.tax),x=fitted.values(mod.tax))) + geom_point() 
 ```
-Statisically significant relationship between tax and crim p-value for slope coefficent of tax < 2e-16 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between tax and crim p-value for slope coefficient of tax < 2e-16 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 ```{r}
 #ptratio
@@ -138,7 +140,8 @@ summary(mod.ptratio)
 ggplot(Boston,aes(y=crim,x=ptratio)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.ptratio),x=fitted.values(mod.ptratio))) + geom_point() 
 ```
-Statisically significant relationship between ptratio and crim p-value for slope coefficent of ptratio = 2.94e-11 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between ptratio and crim p-value for slope coefficient of ptratio = 2.94e-11 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 ```{r}
 #black
@@ -147,7 +150,8 @@ summary(mod.black)
 ggplot(Boston,aes(y=crim,x=black)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.black),x=fitted.values(mod.black))) + geom_point() 
 ```
-Statisically significant relationship between crim and black p-value for slope coefficent of last < 2e-16 - strong evdience of non-zero slope coefficent coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between crim and black p-value for slope coefficient of last < 2e-16 - strong evidence of non-zero slope coefficient coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 ```{r}
 #lstat
@@ -156,8 +160,8 @@ summary(mod.lstat)
 ggplot(Boston,aes(y=crim,x=lstat)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.lstat),x=fitted.values(mod.lstat))) + geom_point() 
 ```
-Statisically significant relationship between crim and lstat p-value for slope coefficent of lstat < 2e-16 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
 
+Statistically significant relationship between crim and lstat p-value for slope coefficient of lstat < 2e-16 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 
 ```{r}
@@ -167,10 +171,11 @@ summary(mod.medv)
 ggplot(Boston,aes(y=crim,x=medv)) + geom_point() + geom_smooth(method = "lm",se = TRUE)
 ggplot(Boston,aes(y=rstudent(mod.medv),x=fitted.values(mod.medv))) + geom_point() 
 ```
-Statisically significant relationship between medv and lstat p-value for slope coefficent of mdev < 2e-16 - strong evdience of non-zero slope coefficent. Residual v Fitted plot shows strong evidence of non-linearity.
+
+Statistically significant relationship between medv and lstat p-value for slope coefficient of mdev < 2e-16 - strong evidence of non-zero slope coefficient. Residual v Fitted plot shows strong evidence of non-linearity.
 
 
-All explanitory factors besides chas have statisically significance (of non-zero slope coefficent coefficent). We note that these factors have non-linear issues in the residual v fitted plots - possibly due to many crim values around 0.
+All explanatory factors besides chas have statistically significance (of non-zero slope coefficient coefficient). We note that these factors have non-linear issues in the residual v fitted plots - possibly due to many crim values around 0.
 
 
 (b)Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis H0 : βj = 0?
@@ -180,10 +185,11 @@ summary(mod.allterm)
 
 ggplot(Boston,aes(y=rstudent(mod.allterm),x=fitted.values(mod.allterm))) + geom_point() 
 ```
-At alpha = .05 we reject the null hypothsis (βj = 0) for dis, rad zn, black, and medv factors. With a p-value of < 2.2e-16 for the model (from f-statistic) we note that the model has strong statisical evidence of providing value vrs the NULL model. This is confirmed with the R^2 of .454 which means all factors explain 45.4% of the variation in crim.
+
+At alpha = .05 we reject the null hypothesis (βj = 0) for dis, rad zn, black, and medv factors. With a p-value of < 2.2e-16 for the model (from f-statistic) we note that the model has strong statistical evidence of providing value vrs the NULL model. This is confirmed with the R^2 of .454 which means all factors explain 45.4% of the variation in crim.
 The residual vs fitted plot does indicate a non-linear relationship because there appears to be highly non-random scattering.
 
-(c)How do your results from (a) compare to your results from (b)? Create a plot displaying the univariate regression coefficients from (a) on the x-axis, and the multiple regression coefficients from (b) on the y-axis. That is, each predictor is displayed as a single point in the plot. Its coefficient in a simple linear regres- sion model is shown on the x-axis, and its coefficient estimate in the multiple linear regression model is shown on the y-axis.
+(c)How do your results from (a) compare to your results from (b)? Create a plot displaying the uni-variate regression coefficients from (a) on the x-axis, and the multiple regression coefficients from (b) on the y-axis. That is, each predictor is displayed as a single point in the plot. Its coefficient in a simple linear regres- sion model is shown on the x-axis, and its coefficient estimate in the multiple linear regression model is shown on the y-axis.
 ```{r}
 simplemodcoef = c(coef(mod.zn)[2],
       coef(mod.indus)[2],
@@ -208,6 +214,7 @@ ggplot(NULL,aes(x=simplemodcoef,y=fullmodcoef)) + geom_point()
 
 ```
 
+The most significant difference is the nox coefficients which was about 30 in the simple coefficient and -10 in the full model.
 
 (d)Is there evidence of non-linear association between any of the predictors and the response? To answer this question, for each predictor X, fit a model of the form (3rd degree polynomial)
 ```{r}
@@ -228,7 +235,8 @@ for(i in 2:length(nn)) {
 }
 
 ```
-It appears that all predictors besides black have a non-linear trend. We note that all models execpt black have values from f-test <.05, this means there is evidence that the additonal polynomial terms have non-zero slope and add 'value' to the model. We also see that in all models besides crim ~ black have statisticaly significant slope coefficients for some or all polynomial terms.
+
+It appears that all predictors besides black have a non-linear trend. We note that all models except black have values from f-test <.05, this means there is evidence that the additional polynomial terms have non-zero slope and add 'value' to the model. We also see that in all models besides crim ~ black have statistically significant slope coefficients for some or all polynomial terms.
 
 
 ## Question 2 (Chapter 4, #4)
@@ -236,22 +244,22 @@ It appears that all predictors besides black have a non-linear trend. We note th
 
 (a)Suppose that we have a set of observations, each with measurements on p = 1 feature, X. We assume that X is uniformly (evenly) distributed on [0,1]. Associated with each observation is a response value. Suppose that we wish to predict a test obser- vation’s response using only observations that are within 10 % of the range of X closest to that test observation. For instance, in order to predict the response for a test observation with X = 0.6, we will use observations in the range [0.55,0.65]. On average, what fraction of the available observations will we use to make the prediction?
 
-We would expect about 10% or .1 of available overservaitions to be used for prediction.
+We would expect about 10% or .1 of available overvaluations to be used for prediction.
 
 
 (b) Now suppose that we have a set of observations, each with measurements on p = 2 features, X1 and X2. We assume that (X1,X2) are uniformly distributed on [0,1]×[0,1]. We wish to predict a test observation’s response using only observations that are within 10 % of the range of X1 and within 10 % of the range of X2 closest to that test observation. For instance, in order to predict the response for a test observation with X1 = 0.6 and X2 = 0.35, we will use observations in the range [0.55, 0.65] for X1 and in the range [0.3, 0.4] for X2. On average, what fraction of the available observations will we use to make the prediction?
 
-We would expect 10% or .1 of both <x1,x2> available observations to be used. If we consider <x1,x2> as a 10X10 grid with only 1 sqare that fits both .1 of x1 and .1 of x2 observations we see that only .1*.1 = .01 of total available observations will be used for prediction
+We would expect 10% or .1 of both <x1,x2> available observations to be used. If we consider <x1,x2> as a 10X10 grid with only 1 square that fits both .1 of x1 and .1 of x2 observations we see that only .1*.1 = .01 of total available observations will be used for prediction
 
 (c) Now suppose that we have a set of observations on p = 100 features. Again the observations are uniformly distributed on each feature, and again each feature ranges in value from 0 to 1. We wish to predict a test observation’s response using observations within the 10 % of each feature’s range that is closest to that test observation. What fraction of the available observations will we use to make the prediction?
 
-Like part (b) we now imagine a hypercube with .1 of each axis available for observations. This means, on average, that only .1^100 of the total observation space would be used for predictions.
+Like part (b) we now imagine a hyper-cube with .1 of each axis available for observations. This means, on average, that only .1^100 of the total observation space would be used for predictions.
 
 (d) Using your answers to parts (a)–(c), argue that a drawback of KNN when p is large is that there are very few training observations “near” any given test observation.
 
-We see that as p features increase the nearest observations avaiable decrease exponentialty at a fixed range for a given 
+We see that as p features increase the nearest observations available decrease exponentially at a fixed range for a given feature P(i).
 
-(e)Now suppose that we wish to make a prediction for a test observation by creating a p-dimensional hypercube centered around the test observation that contains, on average, 10 % of the train- ing observations. For p = 1,2, and 100, what is the length of each side of the hypercube? Comment on your answer.
+(e)Now suppose that we wish to make a prediction for a test observation by creating a p-dimensional hyper-cube centered around the test observation that contains, on average, 10 % of the train- ING observations. For p = 1,2, and 100, what is the length of each side of the hyper-cube? Comment on your answer.
 
 for p = 1 the length of the side is .1
 for p = 2 the area associated with the square is a*a = .1 (where a is the length of each side)
@@ -264,8 +272,8 @@ a
 
 
 
-for p = 100 the area associated with the hypercube b^100 = .1
-Solving for the length of each side (b) of the hypercube:
+for p = 100 the area associated with the hyper-cube b^100 = .1
+Solving for the length of each side (b) of the hyper-cube:
 ```{r}
 b <- .1^(1/100)
 b
@@ -278,28 +286,27 @@ This leads to quite a large space in larger dimensions which means the nearest o
 ```{r}
 library(ISLR)
 data(Weekly)
-
 head(Weekly)
-summary(Weekly$Direction)
-
-
 ```
+
 This question should be answered using the Weekly data set, which is part of the ISLR package. This data is similar in nature to the Smarket data from this chapter’s lab, except that it contains 1,089 weekly returns for 21 years, from the beginning of 1990 to the end of 2010.
 
 
-**different graphical summaries
+
 (a)Produce some numerical and graphical summaries of the Weekly data. Do there appear to be any patterns?
 ```{r}
 summary(Weekly)
+summary(Weekly$Direction)
 
 #factor dirction not numerical
 cor(Weekly[,-9])
+plot(Weekly)
 
-par(mfrow=c(4,2))
 
 
 ```
-Volume and Year have a correlation of 0.84194162.
+
+Volume and Year have a correlation of 0.84194162. We notice that Direction is the only Boolean variable. Nothing other patters are easily detected.
 
 (b)Use the full data set to perform a logistic regression with Direction as the response and the five lag variables plus Volume as predictors. Use the summary function to print the results. Do any of the predictors appear to be statistically significant? If so, which ones?
 ```{r}
@@ -307,27 +314,31 @@ logmod = glm(Direction ~ . - Today -Year, family = binomial, data = Weekly)
 summary(logmod)
 
 ```
-Only Lag2 appears to be statistically signficant.
+
+Only Lag2 appears to be statistically significant with p-value = 0.0296 < alpha = .05.
 
 (c)Compute the confusion matrix and overall fraction of correct predictions. Explain what the confusion matrix is telling you about the types of mistakes made by logistic regression.
 ```{r}
+logmod.preds <- predict(logmod)
 modpredict=rep("Down",1089)
 modpredict[logmod.preds >.5]="Up"
+
 table(modpredict,Weekly$Direction)
 mean(modpredict == Weekly$Direction)
+
 specificity <- 54/(54+430)
 sensitivity <- 557/(557+48)
-
 specificity
 sensitivity
 ```
-The confusion matrix seems to indicate the model correctly predicts the weekly tend in the market 56.1% of the time. However it seems that model had many false postitives  (when the model predicted up but the true result was down). This results in a poor specificity of .11157 compared to a good sensitivity of .9207.
+
+The confusion matrix seems to indicate the model correctly predicts the weekly tend in the market 56.1% of the time. However it seems that model had many false positives  (when the model predicted up but the true result was down). This results in a poor specificity of .11157 compared to a good sensitivity of .9207.
 
 
 (d) Now fit the logistic regression model using a training data period from 1990 to 2008, with Lag2 as the only predictor. Compute the confusion matrix and the overall fraction of correct predictions for the held out data (that is, the data from 2009 and 2010).
 ```{r}
-d.training <- filter(Weekly,Year<2009)
-d.test <- filter(Weekly,Year > 2008)
+d.training <- subset.data.frame(Weekly,Year<2009)
+d.test <- subset.data.frame(Weekly,Year > 2008)
 
 d.mod <- glm(Direction ~ Lag2, data = d.training,family = binomial)
 

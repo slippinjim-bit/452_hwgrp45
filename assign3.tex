@@ -1,0 +1,1790 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Assignment 3},
+            pdfauthor={James Thompson, Sharanya Sivaraman, Neda Zolaktaf},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Assignment 3}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{James Thompson, Sharanya Sivaraman, Neda Zolaktaf}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2019-10-04}
+
+
+\begin{document}
+\maketitle
+
+\hypertarget{question-1-chapter-3-15}{%
+\subsection{Question 1 (Chapter 3,
+\#15)}\label{question-1-chapter-3-15}}
+
+This problem involves the Boston data set, which we saw in the lab for
+this chapter. We will now try to predict per capita crime rate using the
+other variables in this data set. In other words, per capita crime rate
+is the response, and the other variables are the predictors.
+
+(a)For each predictor, fit a simple linear regression model to predict
+the response. Describe your results. In which of the models is there a
+statistically significant association between the predictor and the
+response? Create some plots to back up your assertions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#load packages}
+\KeywordTok{library}\NormalTok{(MASS)}
+\KeywordTok{data}\NormalTok{(Boston)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{#view the data}
+\KeywordTok{head}\NormalTok{(Boston)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      crim zn indus chas   nox    rm  age    dis rad tax ptratio  black
+## 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90
+## 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90
+## 3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83
+## 4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63
+## 5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90
+## 6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12
+##   lstat medv
+## 1  4.98 24.0
+## 2  9.14 21.6
+## 3  4.03 34.7
+## 4  2.94 33.4
+## 5  5.33 36.2
+## 6  5.21 28.7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Do a bunch at once}
+\CommentTok{# modBoston <- function(x) \{}
+\CommentTok{#   form1 <- formula(paste0("crim~",x))}
+\CommentTok{#   fit1 <- lm(form1,data=Boston)}
+\CommentTok{#   summary(fit1)}
+\CommentTok{# \}}
+\CommentTok{# nn <- names(Boston)}
+\CommentTok{# for(i in 2:length(nn)) \{}
+\CommentTok{#   print(nn[i])}
+\CommentTok{#   print(modBoston(nn[i]))}
+\CommentTok{#   print("-----")}
+\CommentTok{# \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#zn}
+\NormalTok{mod.zn =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{zn,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.zn)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ zn, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -4.429 -4.222 -2.620  1.250 84.523 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  4.45369    0.41722  10.675  < 2e-16 ***
+## zn          -0.07393    0.01609  -4.594 5.51e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.435 on 504 degrees of freedom
+## Multiple R-squared:  0.04019,    Adjusted R-squared:  0.03828 
+## F-statistic:  21.1 on 1 and 504 DF,  p-value: 5.506e-06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{zn)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.zn),}\DataTypeTok{x=}\KeywordTok{fitted}\NormalTok{(mod.zn))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-2-2.pdf}
+
+Statistically significant relationship between zn and crim. p-value for
+slope coefficient of zn = 5.51e-06 - strong evidence of non-zero slope
+coefficient. Residual v Fitted plot shows strong evidence of
+non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#indus}
+\NormalTok{mod.indus =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{indus,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.indus)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ indus, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -11.972  -2.698  -0.736   0.712  81.813 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -2.06374    0.66723  -3.093  0.00209 ** 
+## indus        0.50978    0.05102   9.991  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.866 on 504 degrees of freedom
+## Multiple R-squared:  0.1653, Adjusted R-squared:  0.1637 
+## F-statistic: 99.82 on 1 and 504 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{indus)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.indus),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.indus))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-3-2.pdf}
+
+Statistically significant relationship between indus and crim. p-value
+for slope coefficient of indus \textless{} 2e-16 - strong evidence of
+non-zero slope coefficient. Residual v Fitted plot shows strong evidence
+of non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#chas}
+\NormalTok{mod.chas =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{chas,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.chas)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ chas, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -3.738 -3.661 -3.435  0.018 85.232 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   3.7444     0.3961   9.453   <2e-16 ***
+## chas         -1.8928     1.5061  -1.257    0.209    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.597 on 504 degrees of freedom
+## Multiple R-squared:  0.003124,   Adjusted R-squared:  0.001146 
+## F-statistic: 1.579 on 1 and 504 DF,  p-value: 0.2094
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{chas)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.chas),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.chas))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-4-2.pdf}
+
+No evidence of linear relationship in dummy variable chas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#nox}
+\NormalTok{mod.nox =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{nox,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.nox)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ nox, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -12.371  -2.738  -0.974   0.559  81.728 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  -13.720      1.699  -8.073 5.08e-15 ***
+## nox           31.249      2.999  10.419  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.81 on 504 degrees of freedom
+## Multiple R-squared:  0.1772, Adjusted R-squared:  0.1756 
+## F-statistic: 108.6 on 1 and 504 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{nox)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.nox),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.nox))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-5-2.pdf}
+
+Statistically significant relationship between indus and crim p-value
+for slope coefficient of nox \textless{} 2e-16 - strong evidence of
+non-zero slope coefficient. Residual v Fitted plot shows strong evidence
+of non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#rm}
+\NormalTok{mod.rm =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{rm,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.rm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ rm, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -6.604 -3.952 -2.654  0.989 87.197 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   20.482      3.365   6.088 2.27e-09 ***
+## rm            -2.684      0.532  -5.045 6.35e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.401 on 504 degrees of freedom
+## Multiple R-squared:  0.04807,    Adjusted R-squared:  0.04618 
+## F-statistic: 25.45 on 1 and 504 DF,  p-value: 6.347e-07
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{rm)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.rm),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.rm))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-6-2.pdf}
+
+Statistically significant relationship between crim and rm p-value for
+slope coefficient of rm = 6.35e-07 - strong evidence of non-zero slope
+coefficient. Residual v Fitted plot shows strong evidence of
+non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#age}
+\NormalTok{mod.age =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{age,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ age, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -6.789 -4.257 -1.230  1.527 82.849 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -3.77791    0.94398  -4.002 7.22e-05 ***
+## age          0.10779    0.01274   8.463 2.85e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.057 on 504 degrees of freedom
+## Multiple R-squared:  0.1244, Adjusted R-squared:  0.1227 
+## F-statistic: 71.62 on 1 and 504 DF,  p-value: 2.855e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{age)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.age),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.age))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+Statistically significant relationship between age and crim p-value for
+slope coefficient of age = 2.85e-16 - strong evidence of non-zero slope
+coefficient. Residual v Fitted plot shows strong evidence of
+non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#dis}
+\NormalTok{mod.dis =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{dis,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.dis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ dis, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -6.708 -4.134 -1.527  1.516 81.674 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   9.4993     0.7304  13.006   <2e-16 ***
+## dis          -1.5509     0.1683  -9.213   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.965 on 504 degrees of freedom
+## Multiple R-squared:  0.1441, Adjusted R-squared:  0.1425 
+## F-statistic: 84.89 on 1 and 504 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{dis)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.dis),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.dis))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+Statistically significant relationship between dis and crim p-value for
+slope coefficient of dis \textless{} 2e-16 - strong evidence of non-zero
+slope coefficient. Residual v Fitted plot shows strong evidence of
+non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#rad}
+\NormalTok{mod.rad =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{rad,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.rad)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ rad, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -10.164  -1.381  -0.141   0.660  76.433 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -2.28716    0.44348  -5.157 3.61e-07 ***
+## rad          0.61791    0.03433  17.998  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.718 on 504 degrees of freedom
+## Multiple R-squared:  0.3913, Adjusted R-squared:   0.39 
+## F-statistic: 323.9 on 1 and 504 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{rad)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.rad),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.rad))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+Statistically significant relationship between rad and crim p-value for
+slope coefficient of rad \textless{} 2e-16 - strong evidence of non-zero
+slope coefficient. Residual v Fitted plot shows strong evidence of
+non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#tax}
+\NormalTok{mod.tax =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{tax,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.tax)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ tax, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -12.513  -2.738  -0.194   1.065  77.696 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -8.528369   0.815809  -10.45   <2e-16 ***
+## tax          0.029742   0.001847   16.10   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.997 on 504 degrees of freedom
+## Multiple R-squared:  0.3396, Adjusted R-squared:  0.3383 
+## F-statistic: 259.2 on 1 and 504 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{tax)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.tax),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.tax))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-10-2.pdf}
+
+Statistically significant relationship between tax and crim p-value for
+slope coefficient of tax \textless{} 2e-16 - strong evidence of non-zero
+slope coefficient. Residual v Fitted plot shows strong evidence of
+non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#ptratio}
+\NormalTok{mod.ptratio =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{ptratio,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.ptratio)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ ptratio, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -7.654 -3.985 -1.912  1.825 83.353 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -17.6469     3.1473  -5.607 3.40e-08 ***
+## ptratio       1.1520     0.1694   6.801 2.94e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.24 on 504 degrees of freedom
+## Multiple R-squared:  0.08407,    Adjusted R-squared:  0.08225 
+## F-statistic: 46.26 on 1 and 504 DF,  p-value: 2.943e-11
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{ptratio)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.ptratio),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.ptratio))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-11-2.pdf}
+
+Statistically significant relationship between ptratio and crim p-value
+for slope coefficient of ptratio = 2.94e-11 - strong evidence of
+non-zero slope coefficient. Residual v Fitted plot shows strong evidence
+of non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#black}
+\NormalTok{mod.black =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{black,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.black)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ black, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -13.756  -2.299  -2.095  -1.296  86.822 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 16.553529   1.425903  11.609   <2e-16 ***
+## black       -0.036280   0.003873  -9.367   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.946 on 504 degrees of freedom
+## Multiple R-squared:  0.1483, Adjusted R-squared:  0.1466 
+## F-statistic: 87.74 on 1 and 504 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{black)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.black),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.black))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-12-2.pdf}
+
+Statistically significant relationship between crim and black p-value
+for slope coefficient of last \textless{} 2e-16 - strong evidence of
+non-zero slope coefficient coefficient. Residual v Fitted plot shows
+strong evidence of non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#lstat}
+\NormalTok{mod.lstat =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{lstat,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.lstat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ lstat, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -13.925  -2.822  -0.664   1.079  82.862 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -3.33054    0.69376  -4.801 2.09e-06 ***
+## lstat        0.54880    0.04776  11.491  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.664 on 504 degrees of freedom
+## Multiple R-squared:  0.2076, Adjusted R-squared:  0.206 
+## F-statistic:   132 on 1 and 504 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{lstat)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.lstat),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.lstat))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-13-2.pdf}
+
+Statistically significant relationship between crim and lstat p-value
+for slope coefficient of lstat \textless{} 2e-16 - strong evidence of
+non-zero slope coefficient. Residual v Fitted plot shows strong evidence
+of non-linearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#medv}
+\NormalTok{mod.medv =}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim}\OperatorTok{~}\NormalTok{medv,}\DataTypeTok{data=}\NormalTok{Boston)}
+\KeywordTok{summary}\NormalTok{(mod.medv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ medv, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.071 -4.022 -2.343  1.298 80.957 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 11.79654    0.93419   12.63   <2e-16 ***
+## medv        -0.36316    0.03839   -9.46   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.934 on 504 degrees of freedom
+## Multiple R-squared:  0.1508, Adjusted R-squared:  0.1491 
+## F-statistic: 89.49 on 1 and 504 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{crim,}\DataTypeTok{x=}\NormalTok{medv)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.medv),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.medv))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-14-2.pdf}
+
+Statistically significant relationship between medv and lstat p-value
+for slope coefficient of mdev \textless{} 2e-16 - strong evidence of
+non-zero slope coefficient. Residual v Fitted plot shows strong evidence
+of non-linearity.
+
+All explanatory factors besides chas have statistically significance (of
+non-zero slope coefficient coefficient). We note that these factors have
+non-linear issues in the residual v fitted plots - possibly due to many
+crim values around 0.
+
+(b)Fit a multiple regression model to predict the response using all of
+the predictors. Describe your results. For which predictors can we
+reject the null hypothesis H0 : βj = 0?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod.allterm <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(crim }\OperatorTok{~}\StringTok{ }\NormalTok{. , }\DataTypeTok{data =}\NormalTok{ Boston)}
+\KeywordTok{summary}\NormalTok{(mod.allterm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = crim ~ ., data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.924 -2.120 -0.353  1.019 75.051 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  17.033228   7.234903   2.354 0.018949 *  
+## zn            0.044855   0.018734   2.394 0.017025 *  
+## indus        -0.063855   0.083407  -0.766 0.444294    
+## chas         -0.749134   1.180147  -0.635 0.525867    
+## nox         -10.313535   5.275536  -1.955 0.051152 .  
+## rm            0.430131   0.612830   0.702 0.483089    
+## age           0.001452   0.017925   0.081 0.935488    
+## dis          -0.987176   0.281817  -3.503 0.000502 ***
+## rad           0.588209   0.088049   6.680 6.46e-11 ***
+## tax          -0.003780   0.005156  -0.733 0.463793    
+## ptratio      -0.271081   0.186450  -1.454 0.146611    
+## black        -0.007538   0.003673  -2.052 0.040702 *  
+## lstat         0.126211   0.075725   1.667 0.096208 .  
+## medv         -0.198887   0.060516  -3.287 0.001087 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.439 on 492 degrees of freedom
+## Multiple R-squared:  0.454,  Adjusted R-squared:  0.4396 
+## F-statistic: 31.47 on 13 and 492 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Boston,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rstudent}\NormalTok{(mod.allterm),}\DataTypeTok{x=}\KeywordTok{fitted.values}\NormalTok{(mod.allterm))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+At alpha = .05 we reject the null hypothesis (βj = 0) for dis, rad zn,
+black, and medv factors. With a p-value of \textless{} 2.2e-16 for the
+model (from f-statistic) we note that the model has strong statistical
+evidence of providing value vrs the NULL model. This is confirmed with
+the R\^{}2 of .454 which means all factors explain 45.4\% of the
+variation in crim. The residual vs fitted plot does indicate a
+non-linear relationship because there appears to be highly non-random
+scattering.
+
+(c)How do your results from (a) compare to your results from (b)? Create
+a plot displaying the uni-variate regression coefficients from (a) on
+the x-axis, and the multiple regression coefficients from (b) on the
+y-axis. That is, each predictor is displayed as a single point in the
+plot. Its coefficient in a simple linear regres- sion model is shown on
+the x-axis, and its coefficient estimate in the multiple linear
+regression model is shown on the y-axis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simplemodcoef =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{coef}\NormalTok{(mod.zn)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.indus)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.chas)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.nox)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.rm)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.age)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.dis)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.rad)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.tax)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.ptratio)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.black)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.lstat)[}\DecValTok{2}\NormalTok{],}
+      \KeywordTok{coef}\NormalTok{(mod.medv)[}\DecValTok{2}\NormalTok{])}
+\NormalTok{fullmodcoef =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{coef}\NormalTok{(mod.allterm)[}\DecValTok{2}\OperatorTok{:}\DecValTok{14}\NormalTok{])}
+
+\NormalTok{simplemodcoef}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          zn       indus        chas         nox          rm         age 
+## -0.07393498  0.50977633 -1.89277655 31.24853120 -2.68405122  0.10778623 
+##         dis         rad         tax     ptratio       black       lstat 
+## -1.55090168  0.61791093  0.02974225  1.15198279 -0.03627964  0.54880478 
+##        medv 
+## -0.36315992
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fullmodcoef}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            zn         indus          chas           nox            rm 
+##   0.044855215  -0.063854824  -0.749133611 -10.313534912   0.430130506 
+##           age           dis           rad           tax       ptratio 
+##   0.001451643  -0.987175726   0.588208591  -0.003780016  -0.271080558 
+##         black         lstat          medv 
+##  -0.007537505   0.126211376  -0.198886821
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\OtherTok{NULL}\NormalTok{,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{simplemodcoef,}\DataTypeTok{y=}\NormalTok{fullmodcoef)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+The most significant difference is the nox coefficients which was about
+30 in the simple coefficient and -10 in the full model.
+
+(d)Is there evidence of non-linear association between any of the
+predictors and the response? To answer this question, for each predictor
+X, fit a model of the form (3rd degree polynomial)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nonlinBoston <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  form1 <-}\StringTok{ }\KeywordTok{formula}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"crim~"}\NormalTok{,x))}
+\NormalTok{  fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(form1,}\DataTypeTok{data=}\NormalTok{Boston)}
+\NormalTok{  form3 <-}\StringTok{ }\KeywordTok{formula}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"crim~poly("}\NormalTok{,x,}\StringTok{",3)"}\NormalTok{))}
+\NormalTok{  fit3 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(form3,}\DataTypeTok{data=}\NormalTok{Boston)}
+  \KeywordTok{print}\NormalTok{(}\KeywordTok{summary}\NormalTok{(fit3))}
+  \KeywordTok{anova}\NormalTok{(fit1,fit3)}\OperatorTok{$}\StringTok{"Pr(>F)"}\NormalTok{[}\DecValTok{2}\NormalTok{]}
+\NormalTok{\}}
+\NormalTok{nn <-}\StringTok{ }\KeywordTok{names}\NormalTok{(Boston)}
+\NormalTok{nn <-}\StringTok{ }\NormalTok{nn[}\OperatorTok{-}\DecValTok{4}\NormalTok{] }\CommentTok{# remove chas}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\KeywordTok{length}\NormalTok{(nn)) \{}
+  \KeywordTok{print}\NormalTok{(nn[i])}
+  \KeywordTok{print}\NormalTok{(}\KeywordTok{nonlinBoston}\NormalTok{(nn[i]))}
+  \KeywordTok{print}\NormalTok{(}\StringTok{"-----"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "zn"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -4.821 -4.614 -1.294  0.473 84.130 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)    3.6135     0.3722   9.709  < 2e-16 ***
+## poly(zn, 3)1 -38.7498     8.3722  -4.628  4.7e-06 ***
+## poly(zn, 3)2  23.9398     8.3722   2.859  0.00442 ** 
+## poly(zn, 3)3 -10.0719     8.3722  -1.203  0.22954    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.372 on 502 degrees of freedom
+## Multiple R-squared:  0.05824,    Adjusted R-squared:  0.05261 
+## F-statistic: 10.35 on 3 and 502 DF,  p-value: 1.281e-06
+## 
+## [1] 0.008511995
+## [1] "-----"
+## [1] "indus"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -8.278 -2.514  0.054  0.764 79.713 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)        3.614      0.330  10.950  < 2e-16 ***
+## poly(indus, 3)1   78.591      7.423  10.587  < 2e-16 ***
+## poly(indus, 3)2  -24.395      7.423  -3.286  0.00109 ** 
+## poly(indus, 3)3  -54.130      7.423  -7.292  1.2e-12 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.423 on 502 degrees of freedom
+## Multiple R-squared:  0.2597, Adjusted R-squared:  0.2552 
+## F-statistic: 58.69 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 8.408754e-14
+## [1] "-----"
+## [1] "nox"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.110 -2.068 -0.255  0.739 78.302 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     3.6135     0.3216  11.237  < 2e-16 ***
+## poly(nox, 3)1  81.3720     7.2336  11.249  < 2e-16 ***
+## poly(nox, 3)2 -28.8286     7.2336  -3.985 7.74e-05 ***
+## poly(nox, 3)3 -60.3619     7.2336  -8.345 6.96e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.234 on 502 degrees of freedom
+## Multiple R-squared:  0.297,  Adjusted R-squared:  0.2928 
+## F-statistic: 70.69 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 7.122383e-18
+## [1] "-----"
+## [1] "rm"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -18.485  -3.468  -2.221  -0.015  87.219 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)    3.6135     0.3703   9.758  < 2e-16 ***
+## poly(rm, 3)1 -42.3794     8.3297  -5.088 5.13e-07 ***
+## poly(rm, 3)2  26.5768     8.3297   3.191  0.00151 ** 
+## poly(rm, 3)3  -5.5103     8.3297  -0.662  0.50858    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.33 on 502 degrees of freedom
+## Multiple R-squared:  0.06779,    Adjusted R-squared:  0.06222 
+## F-statistic: 12.17 on 3 and 502 DF,  p-value: 1.067e-07
+## 
+## [1] 0.005229427
+## [1] "-----"
+## [1] "age"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.762 -2.673 -0.516  0.019 82.842 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     3.6135     0.3485  10.368  < 2e-16 ***
+## poly(age, 3)1  68.1820     7.8397   8.697  < 2e-16 ***
+## poly(age, 3)2  37.4845     7.8397   4.781 2.29e-06 ***
+## poly(age, 3)3  21.3532     7.8397   2.724  0.00668 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.84 on 502 degrees of freedom
+## Multiple R-squared:  0.1742, Adjusted R-squared:  0.1693 
+## F-statistic: 35.31 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 4.125056e-07
+## [1] "-----"
+## [1] "dis"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -10.757  -2.588   0.031   1.267  76.378 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     3.6135     0.3259  11.087  < 2e-16 ***
+## poly(dis, 3)1 -73.3886     7.3315 -10.010  < 2e-16 ***
+## poly(dis, 3)2  56.3730     7.3315   7.689 7.87e-14 ***
+## poly(dis, 3)3 -42.6219     7.3315  -5.814 1.09e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.331 on 502 degrees of freedom
+## Multiple R-squared:  0.2778, Adjusted R-squared:  0.2735 
+## F-statistic: 64.37 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 3.071837e-19
+## [1] "-----"
+## [1] "rad"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -10.381  -0.412  -0.269   0.179  76.217 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     3.6135     0.2971  12.164  < 2e-16 ***
+## poly(rad, 3)1 120.9074     6.6824  18.093  < 2e-16 ***
+## poly(rad, 3)2  17.4923     6.6824   2.618  0.00912 ** 
+## poly(rad, 3)3   4.6985     6.6824   0.703  0.48231    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.682 on 502 degrees of freedom
+## Multiple R-squared:    0.4,  Adjusted R-squared:  0.3965 
+## F-statistic: 111.6 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 0.02607832
+## [1] "-----"
+## [1] "tax"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -13.273  -1.389   0.046   0.536  76.950 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     3.6135     0.3047  11.860  < 2e-16 ***
+## poly(tax, 3)1 112.6458     6.8537  16.436  < 2e-16 ***
+## poly(tax, 3)2  32.0873     6.8537   4.682 3.67e-06 ***
+## poly(tax, 3)3  -7.9968     6.8537  -1.167    0.244    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.854 on 502 degrees of freedom
+## Multiple R-squared:  0.3689, Adjusted R-squared:  0.3651 
+## F-statistic:  97.8 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 1.144238e-05
+## [1] "-----"
+## [1] "ptratio"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -6.833 -4.146 -1.655  1.408 82.697 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)          3.614      0.361  10.008  < 2e-16 ***
+## poly(ptratio, 3)1   56.045      8.122   6.901 1.57e-11 ***
+## poly(ptratio, 3)2   24.775      8.122   3.050  0.00241 ** 
+## poly(ptratio, 3)3  -22.280      8.122  -2.743  0.00630 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.122 on 502 degrees of freedom
+## Multiple R-squared:  0.1138, Adjusted R-squared:  0.1085 
+## F-statistic: 21.48 on 3 and 502 DF,  p-value: 4.171e-13
+## 
+## [1] 0.0002541647
+## [1] "-----"
+## [1] "black"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -13.096  -2.343  -2.128  -1.439  86.790 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       3.6135     0.3536  10.218   <2e-16 ***
+## poly(black, 3)1 -74.4312     7.9546  -9.357   <2e-16 ***
+## poly(black, 3)2   5.9264     7.9546   0.745    0.457    
+## poly(black, 3)3  -4.8346     7.9546  -0.608    0.544    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.955 on 502 degrees of freedom
+## Multiple R-squared:  0.1498, Adjusted R-squared:  0.1448 
+## F-statistic: 29.49 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 0.6301501
+## [1] "-----"
+## [1] "lstat"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -15.234  -2.151  -0.486   0.066  83.353 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       3.6135     0.3392  10.654   <2e-16 ***
+## poly(lstat, 3)1  88.0697     7.6294  11.543   <2e-16 ***
+## poly(lstat, 3)2  15.8882     7.6294   2.082   0.0378 *  
+## poly(lstat, 3)3 -11.5740     7.6294  -1.517   0.1299    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.629 on 502 degrees of freedom
+## Multiple R-squared:  0.2179, Adjusted R-squared:  0.2133 
+## F-statistic: 46.63 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 0.03698322
+## [1] "-----"
+## [1] "medv"
+## 
+## Call:
+## lm(formula = form3, data = Boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -24.427  -1.976  -0.437   0.439  73.655 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       3.614      0.292  12.374  < 2e-16 ***
+## poly(medv, 3)1  -75.058      6.569 -11.426  < 2e-16 ***
+## poly(medv, 3)2   88.086      6.569  13.409  < 2e-16 ***
+## poly(medv, 3)3  -48.033      6.569  -7.312 1.05e-12 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.569 on 502 degrees of freedom
+## Multiple R-squared:  0.4202, Adjusted R-squared:  0.4167 
+## F-statistic: 121.3 on 3 and 502 DF,  p-value: < 2.2e-16
+## 
+## [1] 2.504778e-42
+## [1] "-----"
+\end{verbatim}
+
+It appears that all predictors besides black have a non-linear trend. We
+note that all models except black have values from f-test
+\textless{}.05, this means there is evidence that the additional
+polynomial terms have non-zero slope and add `value' to the model. We
+also see that in all models besides crim \textasciitilde{} black have
+statistically significant slope coefficients for some or all polynomial
+terms.
+
+\hypertarget{question-2-chapter-4-4}{%
+\subsection{Question 2 (Chapter 4, \#4)}\label{question-2-chapter-4-4}}
+
+When the number of features p is large, there tends to be a
+deterioration in the performance of KNN and other local approaches that
+perform prediction using only observations that are near the test
+observation for which a prediction must be made. This phenomenon is
+known as the curse of dimensionality, and it ties into the fact that
+non-parametric approaches often perform poorly when p is large. We will
+now investigate this curse.
+
+(a)Suppose that we have a set of observations, each with measurements on
+p = 1 feature, X. We assume that X is uniformly (evenly) distributed on
+{[}0,1{]}. Associated with each observation is a response value. Suppose
+that we wish to predict a test obser- vation's response using only
+observations that are within 10 \% of the range of X closest to that
+test observation. For instance, in order to predict the response for a
+test observation with X = 0.6, we will use observations in the range
+{[}0.55,0.65{]}. On average, what fraction of the available observations
+will we use to make the prediction?
+
+We would expect about 10\% or .1 of available overvaluations to be used
+for prediction.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Now suppose that we have a set of observations, each with measurements
+  on p = 2 features, X1 and X2. We assume that (X1,X2) are uniformly
+  distributed on {[}0,1{]}×{[}0,1{]}. We wish to predict a test
+  observation's response using only observations that are within 10 \%
+  of the range of X1 and within 10 \% of the range of X2 closest to that
+  test observation. For instance, in order to predict the response for a
+  test observation with X1 = 0.6 and X2 = 0.35, we will use observations
+  in the range {[}0.55, 0.65{]} for X1 and in the range {[}0.3, 0.4{]}
+  for X2. On average, what fraction of the available observations will
+  we use to make the prediction?
+\end{enumerate}
+
+We would expect 10\% or .1 of both \textless{}x1,x2\textgreater{}
+available observations to be used. If we consider
+\textless{}x1,x2\textgreater{} as a 10X10 grid with only 1 square that
+fits both .1 of x1 and .1 of x2 observations we see that only .1*.1 =
+.01 of total available observations will be used for prediction
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Now suppose that we have a set of observations on p = 100 features.
+  Again the observations are uniformly distributed on each feature, and
+  again each feature ranges in value from 0 to 1. We wish to predict a
+  test observation's response using observations within the 10 \% of
+  each feature's range that is closest to that test observation. What
+  fraction of the available observations will we use to make the
+  prediction?
+\end{enumerate}
+
+Like part (b) we now imagine a hyper-cube with .1 of each axis available
+for observations. This means, on average, that only .1\^{}100 of the
+total observation space would be used for predictions.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Using your answers to parts (a)--(c), argue that a drawback of KNN
+  when p is large is that there are very few training observations
+  ``near'' any given test observation.
+\end{enumerate}
+
+We see that as p features increase the nearest observations available
+decrease exponentially at a fixed range for a given feature P(i).
+
+(e)Now suppose that we wish to make a prediction for a test observation
+by creating a p-dimensional hyper-cube centered around the test
+observation that contains, on average, 10 \% of the train- ING
+observations. For p = 1,2, and 100, what is the length of each side of
+the hyper-cube? Comment on your answer.
+
+for p = 1 the length of the side is .1 for p = 2 the area associated
+with the square is a*a = .1 (where a is the length of each side) solving
+for the length of each side a
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a <-}\StringTok{ }\FloatTok{.1}\OperatorTok{^}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3162278
+\end{verbatim}
+
+for p = 100 the area associated with the hyper-cube b\^{}100 = .1
+Solving for the length of each side (b) of the hyper-cube:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b <-}\StringTok{ }\FloatTok{.1}\OperatorTok{^}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{100}\NormalTok{)}
+\NormalTok{b}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9772372
+\end{verbatim}
+
+This leads to quite a large space in larger dimensions which means the
+nearest observations may not be very good for prediction because in
+reality they are not all that near.
+
+\hypertarget{question-3-chapter-4-10-parts-a-h-9-marks}{%
+\subsection{Question 3 (Chapter 4, \#10 parts (a)-(h), 9
+marks)}\label{question-3-chapter-4-10-parts-a-h-9-marks}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ISLR)}
+\KeywordTok{data}\NormalTok{(Weekly)}
+\KeywordTok{head}\NormalTok{(Weekly)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Year   Lag1   Lag2   Lag3   Lag4   Lag5    Volume  Today Direction
+## 1 1990  0.816  1.572 -3.936 -0.229 -3.484 0.1549760 -0.270      Down
+## 2 1990 -0.270  0.816  1.572 -3.936 -0.229 0.1485740 -2.576      Down
+## 3 1990 -2.576 -0.270  0.816  1.572 -3.936 0.1598375  3.514        Up
+## 4 1990  3.514 -2.576 -0.270  0.816  1.572 0.1616300  0.712        Up
+## 5 1990  0.712  3.514 -2.576 -0.270  0.816 0.1537280  1.178        Up
+## 6 1990  1.178  0.712  3.514 -2.576 -0.270 0.1544440 -1.372      Down
+\end{verbatim}
+
+This question should be answered using the Weekly data set, which is
+part of the ISLR package. This data is similar in nature to the Smarket
+data from this chapter's lab, except that it contains 1,089 weekly
+returns for 21 years, from the beginning of 1990 to the end of 2010.
+
+(a)Produce some numerical and graphical summaries of the Weekly data. Do
+there appear to be any patterns?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(Weekly)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year           Lag1               Lag2               Lag3         
+##  Min.   :1990   Min.   :-18.1950   Min.   :-18.1950   Min.   :-18.1950  
+##  1st Qu.:1995   1st Qu.: -1.1540   1st Qu.: -1.1540   1st Qu.: -1.1580  
+##  Median :2000   Median :  0.2410   Median :  0.2410   Median :  0.2410  
+##  Mean   :2000   Mean   :  0.1506   Mean   :  0.1511   Mean   :  0.1472  
+##  3rd Qu.:2005   3rd Qu.:  1.4050   3rd Qu.:  1.4090   3rd Qu.:  1.4090  
+##  Max.   :2010   Max.   : 12.0260   Max.   : 12.0260   Max.   : 12.0260  
+##       Lag4               Lag5              Volume       
+##  Min.   :-18.1950   Min.   :-18.1950   Min.   :0.08747  
+##  1st Qu.: -1.1580   1st Qu.: -1.1660   1st Qu.:0.33202  
+##  Median :  0.2380   Median :  0.2340   Median :1.00268  
+##  Mean   :  0.1458   Mean   :  0.1399   Mean   :1.57462  
+##  3rd Qu.:  1.4090   3rd Qu.:  1.4050   3rd Qu.:2.05373  
+##  Max.   : 12.0260   Max.   : 12.0260   Max.   :9.32821  
+##      Today          Direction 
+##  Min.   :-18.1950   Down:484  
+##  1st Qu.: -1.1540   Up  :605  
+##  Median :  0.2410             
+##  Mean   :  0.1499             
+##  3rd Qu.:  1.4050             
+##  Max.   : 12.0260
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(Weekly}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Down   Up 
+##  484  605
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#factor dirction not numerical}
+\KeywordTok{cor}\NormalTok{(Weekly[,}\OperatorTok{-}\DecValTok{9}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Year         Lag1        Lag2        Lag3         Lag4
+## Year    1.00000000 -0.032289274 -0.03339001 -0.03000649 -0.031127923
+## Lag1   -0.03228927  1.000000000 -0.07485305  0.05863568 -0.071273876
+## Lag2   -0.03339001 -0.074853051  1.00000000 -0.07572091  0.058381535
+## Lag3   -0.03000649  0.058635682 -0.07572091  1.00000000 -0.075395865
+## Lag4   -0.03112792 -0.071273876  0.05838153 -0.07539587  1.000000000
+## Lag5   -0.03051910 -0.008183096 -0.07249948  0.06065717 -0.075675027
+## Volume  0.84194162 -0.064951313 -0.08551314 -0.06928771 -0.061074617
+## Today  -0.03245989 -0.075031842  0.05916672 -0.07124364 -0.007825873
+##                Lag5      Volume        Today
+## Year   -0.030519101  0.84194162 -0.032459894
+## Lag1   -0.008183096 -0.06495131 -0.075031842
+## Lag2   -0.072499482 -0.08551314  0.059166717
+## Lag3    0.060657175 -0.06928771 -0.071243639
+## Lag4   -0.075675027 -0.06107462 -0.007825873
+## Lag5    1.000000000 -0.05851741  0.011012698
+## Volume -0.058517414  1.00000000 -0.033077783
+## Today   0.011012698 -0.03307778  1.000000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(Weekly)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assign3_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+Volume and Year have a correlation of 0.84194162. We notice that
+Direction is the only Boolean variable. Nothing other patters are easily
+detected.
+
+(b)Use the full data set to perform a logistic regression with Direction
+as the response and the five lag variables plus Volume as predictors.
+Use the summary function to print the results. Do any of the predictors
+appear to be statistically significant? If so, which ones?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logmod =}\StringTok{ }\KeywordTok{glm}\NormalTok{(Direction }\OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{-}\StringTok{ }\NormalTok{Today }\OperatorTok{-}\NormalTok{Year, }\DataTypeTok{family =}\NormalTok{ binomial, }\DataTypeTok{data =}\NormalTok{ Weekly)}
+\KeywordTok{summary}\NormalTok{(logmod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = Direction ~ . - Today - Year, family = binomial, 
+##     data = Weekly)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.6949  -1.2565   0.9913   1.0849   1.4579  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)   
+## (Intercept)  0.26686    0.08593   3.106   0.0019 **
+## Lag1        -0.04127    0.02641  -1.563   0.1181   
+## Lag2         0.05844    0.02686   2.175   0.0296 * 
+## Lag3        -0.01606    0.02666  -0.602   0.5469   
+## Lag4        -0.02779    0.02646  -1.050   0.2937   
+## Lag5        -0.01447    0.02638  -0.549   0.5833   
+## Volume      -0.02274    0.03690  -0.616   0.5377   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1496.2  on 1088  degrees of freedom
+## Residual deviance: 1486.4  on 1082  degrees of freedom
+## AIC: 1500.4
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+Only Lag2 appears to be statistically significant with p-value = 0.0296
+\textless{} alpha = .05.
+
+(c)Compute the confusion matrix and overall fraction of correct
+predictions. Explain what the confusion matrix is telling you about the
+types of mistakes made by logistic regression.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logmod.preds <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(logmod)}
+\NormalTok{modpredict=}\KeywordTok{rep}\NormalTok{(}\StringTok{"Down"}\NormalTok{,}\DecValTok{1089}\NormalTok{)}
+\NormalTok{modpredict[logmod.preds }\OperatorTok{>}\NormalTok{.}\DecValTok{5}\NormalTok{]=}\StringTok{"Up"}
+
+\KeywordTok{table}\NormalTok{(modpredict,Weekly}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           
+## modpredict Down  Up
+##       Down  465 563
+##       Up     19  42
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(modpredict }\OperatorTok{==}\StringTok{ }\NormalTok{Weekly}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4655647
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{specificity <-}\StringTok{ }\DecValTok{54}\OperatorTok{/}\NormalTok{(}\DecValTok{54}\OperatorTok{+}\DecValTok{430}\NormalTok{)}
+\NormalTok{sensitivity <-}\StringTok{ }\DecValTok{557}\OperatorTok{/}\NormalTok{(}\DecValTok{557}\OperatorTok{+}\DecValTok{48}\NormalTok{)}
+\NormalTok{specificity}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1115702
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sensitivity}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9206612
+\end{verbatim}
+
+The confusion matrix seems to indicate the model correctly predicts the
+weekly tend in the market 56.1\% of the time. However it seems that
+model had many false positives (when the model predicted up but the true
+result was down). This results in a poor specificity of .11157 compared
+to a good sensitivity of .9207.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Now fit the logistic regression model using a training data period
+  from 1990 to 2008, with Lag2 as the only predictor. Compute the
+  confusion matrix and the overall fraction of correct predictions for
+  the held out data (that is, the data from 2009 and 2010).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d.training <-}\StringTok{ }\KeywordTok{subset.data.frame}\NormalTok{(Weekly,Year}\OperatorTok{<}\DecValTok{2009}\NormalTok{)}
+\NormalTok{d.test <-}\StringTok{ }\KeywordTok{subset.data.frame}\NormalTok{(Weekly,Year }\OperatorTok{>}\StringTok{ }\DecValTok{2008}\NormalTok{)}
+
+\NormalTok{d.mod <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(Direction }\OperatorTok{~}\StringTok{ }\NormalTok{Lag2, }\DataTypeTok{data =}\NormalTok{ d.training,}\DataTypeTok{family =}\NormalTok{ binomial)}
+
+\NormalTok{d.probs <-}\StringTok{  }\KeywordTok{predict.glm}\NormalTok{(d.mod,}\DataTypeTok{newdata =}\NormalTok{ d.test,}\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{d.preds <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\StringTok{"Down"}\NormalTok{,}\KeywordTok{length}\NormalTok{(d.probs))}
+\NormalTok{d.preds[d.probs}\OperatorTok{>}\NormalTok{.}\DecValTok{5}\NormalTok{] =}\StringTok{ "Up"}
+\KeywordTok{table}\NormalTok{(d.preds,d.test}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        
+## d.preds Down Up
+##    Down    9  5
+##    Up     34 56
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(d.preds}\OperatorTok{==}\StringTok{ }\NormalTok{d.test}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.625
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Repeat (d) using LDA.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MASS)}
+
+\NormalTok{e.mod <-}\StringTok{ }\KeywordTok{lda}\NormalTok{(Direction }\OperatorTok{~}\StringTok{ }\NormalTok{Lag2, }\DataTypeTok{data =}\NormalTok{ d.training,}\DataTypeTok{family =}\NormalTok{ binomial)}
+
+\NormalTok{e.preds <-}\StringTok{  }\KeywordTok{predict}\NormalTok{(e.mod,}\DataTypeTok{newdata =}\NormalTok{ d.test,}\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+
+\KeywordTok{table}\NormalTok{(e.preds}\OperatorTok{$}\NormalTok{class,d.test}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       
+##        Down Up
+##   Down    9  5
+##   Up     34 56
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(e.preds}\OperatorTok{$}\NormalTok{class}\OperatorTok{==}\StringTok{ }\NormalTok{d.test}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.625
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Repeat (d) using QDA.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f.mod <-}\StringTok{ }\KeywordTok{qda}\NormalTok{(Direction }\OperatorTok{~}\StringTok{ }\NormalTok{Lag2, }\DataTypeTok{data =}\NormalTok{ d.training,}\DataTypeTok{family =}\NormalTok{ binomial)}
+
+\NormalTok{f.preds <-}\StringTok{  }\KeywordTok{predict}\NormalTok{(f.mod,}\DataTypeTok{newdata =}\NormalTok{ d.test,}\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+
+\KeywordTok{table}\NormalTok{(f.preds}\OperatorTok{$}\NormalTok{class,d.test}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       
+##        Down Up
+##   Down    0  0
+##   Up     43 61
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(f.preds}\OperatorTok{$}\NormalTok{class}\OperatorTok{==}\StringTok{ }\NormalTok{d.test}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5865385
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Repeat (d) using KNN with K = 1.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(class)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{g.train <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(d.training}\OperatorTok{$}\NormalTok{Lag2)}
+\NormalTok{g.test <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(d.test}\OperatorTok{$}\NormalTok{Lag2)}
+\NormalTok{g.pred <-}\StringTok{ }\KeywordTok{knn}\NormalTok{(g.train,g.test,d.training}\OperatorTok{$}\NormalTok{Direction,}\DataTypeTok{k=}\DecValTok{1}\NormalTok{)}
+
+\KeywordTok{table}\NormalTok{(g.pred,d.test}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       
+## g.pred Down Up
+##   Down   21 30
+##   Up     22 31
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(g.pred}\OperatorTok{==}\NormalTok{d.test}\OperatorTok{$}\NormalTok{Direction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Which of these methods appears to provide the best results on this
+  data?
+\end{enumerate}
+
+Both LDA and logistic regression methods produce the highest proportion
+of correctly classified test set responses with 62.5\% correctly
+identified.
+
+
+\end{document}
